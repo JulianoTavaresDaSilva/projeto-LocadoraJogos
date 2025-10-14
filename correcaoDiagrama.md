@@ -1,0 +1,4 @@
+- cada atributo identificador deve ser idealmente marcado com <<oid>>
+- não é aconselhado repetir o nome da classe nos atributos. eu sei que o atributo id dentro de Usuário é o id do Usuário, nomeá-lo como idUsuário é verboso
+- classes de associação não possuem id em atributo (como JogoPlataforma.idJogoPlataforma), mas são identificadas pelo par de objetos associados (JogoPlataforma.jogo e JogoPlataforma.plataforma)
+- será que não é necessário identificar de qual plataforma é cada console? se eu alugar um console, como saber quais são os acessório compatíveis ao aparelho? algumas perguntas que o diagrama não responde
