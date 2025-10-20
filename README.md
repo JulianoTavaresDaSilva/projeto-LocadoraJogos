@@ -2,4 +2,5 @@
 Grupo: Gelson Oliveira e Juliano Tavares.
 
 Diagrama de Classes
-<img width="1512" height="461" alt="image" src="https://github.com/user-attachments/assets/ce4a06b0-e5ff-4678-ba3e-372bead00a25" />
+<img width="1511" height="551" alt="image" src="https://github.com/user-attachments/assets/af8e677e-bb5d-467b-8f20-b343977ec21f" />
+
