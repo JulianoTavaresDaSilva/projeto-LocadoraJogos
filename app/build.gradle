@@ -16,8 +16,7 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation libs.junit
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
 
     // This dependency is used by the application.
     implementation libs.guava
@@ -32,9 +31,17 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'br.ifsc.locadora.Main'
 }
 
 run{
     standardInput = System.in
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
 }
