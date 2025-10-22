@@ -23,7 +23,7 @@ public class LocacaoJogo {
 
     @Override
     public String toString() {
-        return "Locação #" + id + " | " + usuario.getNome() + " alugou " +
+        return "Locacao #" + id + " | " + usuario.getNome() + " alugou " +
                 jogoPlataforma.getJogo().getTitulo() + " por " + tempo.getDias() +
                 " dias | Valor: R$ " + valorTotal;
     }
