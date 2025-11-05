@@ -1,35 +1,38 @@
 package br.ifsc.locadora;
 
-import java.time.LocalDate;
-
 public class TempoLocacaoJogo {
-    private Usuario usuario;
-    private JogoPlataforma jogoPlataforma;
-    private LocalDate dataInicio;
+    private int id;
     private int dias;
-    private double valorTotal;
+    private LocacaoJogo locacaoJogo;
 
-    public TempoLocacaoJogo(Usuario usuario, JogoPlataforma jogoPlataforma, int dias) {
-        this.usuario = usuario;
-        this.jogoPlataforma = jogoPlataforma;
+    public TempoLocacaoJogo(int id, int dias, LocacaoJogo locacaoJogo) {
+        this.id = id;
         this.dias = dias;
-        this.dataInicio = LocalDate.now();
-        this.valorTotal = calcularValor();
+        this.locacaoJogo = locacaoJogo;
     }
 
-    private double calcularValor() {
-        return jogoPlataforma.getPrecoDiario() * dias;
+    public int getId() {
+        return id;
     }
 
-    public Usuario getUsuario() { return usuario; }
-    public JogoPlataforma getJogoPlataforma() { return jogoPlataforma; }
-    public LocalDate getDataInicio() { return dataInicio; }
-    public int getDias() { return dias; }
-    public double getValorTotal() { return valorTotal; }
+    public int getDias() {
+        return dias;
+    }
+
+    public LocacaoJogo getLocacaoJogo() {
+        return locacaoJogo;
+    }
+
+    public void setDias(int dias) {
+        this.dias = dias;
+    }
+
+    public void setLocacaoJogo(LocacaoJogo locacaoJogo) {
+        this.locacaoJogo = locacaoJogo;
+    }
 
     @Override
     public String toString() {
-        return usuario.getNome() + " alugou " + jogoPlataforma.getJogo().getTitulo() +
-                " por " + dias + " dias | Valor total: R$" + valorTotal;
+        return "Tempo de Locação Jogo #" + id + " - " + dias + " dias";
     }
 }

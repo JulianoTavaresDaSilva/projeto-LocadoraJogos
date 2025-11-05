@@ -1,38 +1,38 @@
 package br.ifsc.locadora;
 
-import java.util.List;
-
 public class TempoLocacaoConsole {
-    private Usuario usuario;
-    private Console console;
-    private List<Acessorio> acessorios;
+    private int id;
     private int horas;
-    private double valorTotal;
+    private LocacaoConsole locacaoConsole;
 
-    public TempoLocacaoConsole(Usuario usuario, Console console, List<Acessorio> acessorios, int horas) {
-        this.usuario = usuario;
-        this.console = console;
-        this.acessorios = acessorios;
+    public TempoLocacaoConsole(int id, int horas, LocacaoConsole locacaoConsole) {
+        this.id = id;
         this.horas = horas;
-        this.valorTotal = calcularValor();
+        this.locacaoConsole = locacaoConsole;
     }
 
-    private double calcularValor() {
-        double valor = console.getPrecoHora() * horas;
-        valor += acessorios.size() * 5.0;
-        return valor;
+    public int getId() {
+        return id;
     }
 
-    public Usuario getUsuario() { return usuario; }
-    public Console getConsole() { return console; }
-    public List<Acessorio> getAcessorios() { return acessorios; }
-    public int getHoras() { return horas; }
-    public double getValorTotal() { return valorTotal; }
+    public int getHoras() {
+        return horas;
+    }
+
+    public LocacaoConsole getLocacaoConsole() {
+        return locacaoConsole;
+    }
+
+    public void setHoras(int horas) {
+        this.horas = horas;
+    }
+
+    public void setLocacaoConsole(LocacaoConsole locacaoConsole) {
+        this.locacaoConsole = locacaoConsole;
+    }
 
     @Override
     public String toString() {
-        return usuario.getNome() + " alugou " + console.getNome() +
-                " por " + horas + " horas | Acessórios: " + acessorios.size() +
-                " | Valor total: R$" + valorTotal;
+        return "Tempo de Locação Console #" + id + " - " + horas + "h";
     }
 }
