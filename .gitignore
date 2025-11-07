@@ -1,5 +1,49 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Compiled class files
+*.class
 
-# Ignore Gradle build output directory
-build
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# Eclipse / IntelliJ / VSCode
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+.vscode/
+
+# Gradle
+.gradle/
+build/
+
+# Ignore local Gradle wrapper files (keep wrapper scripts!)
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Java-specific output folders
+out/
+bin/
