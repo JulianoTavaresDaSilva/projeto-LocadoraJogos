@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Optional;
+import java.util.InputMismatchException;
+
 
 public class Main {
     private static Scanner entrada = new Scanner(System.in);
@@ -89,6 +91,7 @@ public class Main {
         }
     }
 
+
     /* ---------- Menus ---------- */
 
     private static void menuCliente(Usuario u) {
@@ -121,26 +124,42 @@ public class Main {
     private static void menuAdmin(Usuario admin) {
         while (true) {
             System.out.println("\n--- Menu Administrador ---");
-            System.out.println("1 - Gerenciar usuarios");
-            System.out.println("2 - Gerenciar jogos e plataformas");
-            System.out.println("3 - Gerenciar consoles e acessórios");
-            System.out.println("4 - Listar locacoes (jogos e consoles)");
-            System.out.println("5 - Ver disponibilidade (estoque jogos / consoles em uso)");
+            System.out.println("1 - Listar jogos disponiveis");
+            System.out.println("2 - Alugar jogo");
+            System.out.println("3 - Alugar console (uso local)");
+            System.out.println("4 - Historico de locacoes");
+            System.out.println("5 - Atualizar meus dados");
+            System.out.println("6 - Gerenciar usuarios");
+            System.out.println("7 - Gerenciar jogos e plataformas");
+            System.out.println("8 - Gerenciar consoles e acessorios");
+            System.out.println("9 - Listar todas as locacoes (jogos e consoles)");
+            System.out.println("10 - Ver disponibilidade (estoque jogos / consoles em uso)");
             System.out.println("0 - Logout");
             System.out.print("Escolha: ");
+
             int op = lerInt();
 
             switch (op) {
-                case 1 -> gerenciarUsuarios();
-                case 2 -> gerenciarJogosPlataformas();
-                case 3 -> gerenciarConsolesAcessorios();
-                case 4 -> listarTodasLocacoes();
-                case 5 -> verDisponibilidade();
+                // --- Funções de Cliente ---
+                case 1 -> listarJogos();
+                case 2 -> alugarJogo(admin);
+                case 3 -> alugarConsole(admin);
+                case 4 -> históricoUsuario(admin);
+                case 5 -> atualizarDadosUsuario(admin);
+
+                // --- Funções de Administrador ---
+                case 6 -> gerenciarUsuarios();
+                case 7 -> gerenciarJogosPlataformas();
+                case 8 -> gerenciarConsolesAcessorios();
+                case 9 -> listarTodasLocacoes();
+                case 10 -> verDisponibilidade();
+
                 case 0 -> {
                     System.out.println("Logout...");
                     return;
                 }
-                default -> System.out.println("Opcao invalida.");
+
+                default -> System.out.println("Opção inválida.");
             }
         }
     }
@@ -269,33 +288,48 @@ public class Main {
     }
 
     private static void atualizarDadosUsuario(Usuario u) {
-        System.out.println("\n--- Atualizar dados ---");
-        System.out.println("1 - Nome\n2 - Email\n3 - Telefone\n4 - Senha\n0 - Cancelar");
-        System.out.print("Escolha: ");
-        int op = lerInt();
-        entrada.nextLine();
-        switch (op) {
-            case 1 -> {
-                System.out.print("Novo nome: ");
-                u.setNome(lerLinha());
+        while (true) {
+            System.out.println("\n--- Atualizar dados ---");
+            System.out.println("1 - Nome");
+            System.out.println("2 - Email");
+            System.out.println("3 - Telefone");
+            System.out.println("4 - Senha");
+            System.out.println("0 - Cancelar");
+            System.out.print("Escolha: ");
+
+            int opcao = lerInt();
+
+            switch (opcao) {
+                case 1 -> {
+                    System.out.print("Novo nome: ");
+                    u.setNome(lerString());
+                    System.out.println("Nome atualizado com sucesso!");
+                }
+                case 2 -> {
+                    System.out.print("Novo email: ");
+                    u.setEmail(lerString());
+                    System.out.println("Email atualizado com sucesso!");
+                }
+                case 3 -> {
+                    System.out.print("Novo telefone: ");
+                    u.setTelefone(lerString());
+                    System.out.println("Telefone atualizado com sucesso!");
+                }
+                case 4 -> {
+                    System.out.print("Nova senha: ");
+                    u.setSenha(lerString());
+                    System.out.println("Senha atualizada com sucesso!");
+                }
+                case 0 -> {
+                    System.out.println("Atualização cancelada.");
+                    return;
+                }
+                default -> System.out.println("Opção inválida, tente novamente.");
             }
-            case 2 -> {
-                System.out.print("Novo email: ");
-                u.setEmail(lerLinha());
-            }
-            case 3 -> {
-                System.out.print("Novo telefone: ");
-                u.setTelefone(lerLinha());
-            }
-            case 4 -> {
-                System.out.print("Nova senha: ");
-                u.setSenha(lerLinha());
-            }
-            case 0 -> System.out.println("Cancelado.");
-            default -> System.out.println("Opcao invalida.");
         }
-        System.out.println("Dados atualizados: " + u);
     }
+
+
 
     /* ---------- Funcionalidades Admin (CRUD) ---------- */
 
@@ -513,12 +547,23 @@ public class Main {
     private static int lerInt() {
         while (true) {
             try {
-                String s = entrada.nextLine();
-                return Integer.parseInt(s.trim());
-            } catch (Exception e) {
-                System.out.print("Entrada invalida. Digite um numero: ");
+                int valor = entrada.nextInt();
+                entrada.nextLine(); // limpa o ENTER deixado no buffer
+                return valor;
+            } catch (InputMismatchException e) {
+                System.out.print("Digite um número válido: ");
+                entrada.nextLine(); // limpa entrada inválida
             }
         }
+    }
+
+    private static String lerString() {
+        String texto = entrada.nextLine();
+        while (texto.isBlank()) {
+            System.out.print("Entrada vazia, digite novamente: ");
+            texto = entrada.nextLine();
+        }
+        return texto;
     }
 
     private static double lerDouble() {
