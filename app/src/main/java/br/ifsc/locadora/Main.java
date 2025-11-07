@@ -369,10 +369,16 @@ public class Main {
     private static void gerenciarJogosPlataformas() {
         while (true) {
             System.out.println("\n--- Gerenciar Jogos e Plataformas ---");
-            System.out.println("1 - Listar jogos\n2 - Cadastrar plataforma\n3 - Cadastrar jogo na plataforma\n4 - Atualizar estoque/preço\n5 - Remover jogo\n0 - Voltar");
+            System.out.println("""
+            1 - Listar jogos
+            2 - Cadastrar plataforma
+            3 - Cadastrar jogo na plataforma
+            4 - Atualizar estoque/preço
+            5 - Remover jogo
+            0 - Voltar
+            """);
             System.out.print("Escolha: ");
-            int op = lerInt();
-            entrada.nextLine();
+            int op = lerInt(); // método auxiliar já trata o buffer
 
             switch (op) {
                 case 1 -> listarJogos();
@@ -395,20 +401,22 @@ public class Main {
                     String titulo = lerLinha();
                     System.out.print("Genero: ");
                     String genero = lerLinha();
+
                     System.out.println("Escolha plataforma:");
                     for (int i = 0; i < plataformas.size(); i++) {
                         System.out.printf("%d) %s%n", i + 1, plataformas.get(i).getNome());
                     }
                     int pindex = lerInt();
                     if (pindex < 1 || pindex > plataformas.size()) {
-                        System.out.println("Invalido.");
+                        System.out.println("Inválido.");
                         break;
                     }
                     Plataforma escolhido = plataformas.get(pindex - 1);
                     System.out.print("Estoque: ");
                     int estoque = lerInt();
-                    System.out.print("Preço diario: ");
+                    System.out.print("Preço diário: ");
                     double preco = lerDouble();
+
                     Jogo j = new Jogo(gerarId(), titulo, genero);
                     JogoPlataforma jp = new JogoPlataforma(j, escolhido, estoque, preco);
                     jogosPlataforma.add(jp);
@@ -419,15 +427,14 @@ public class Main {
                     System.out.print("Escolha jogo para atualizar (numero): ");
                     int idx = lerInt();
                     if (idx < 1 || idx > jogosPlataforma.size()) {
-                        System.out.println("Invalido.");
+                        System.out.println("Inválido.");
                         break;
                     }
                     JogoPlataforma jp = jogosPlataforma.get(idx - 1);
                     System.out.print("Novo estoque (atual " + jp.getEstoque() + "): ");
                     int novoEst = lerInt();
-                    JogoPlataforma novo = new JogoPlataforma(jp.getJogo(), jp.getPlataforma(), novoEst, jp.getPrecoDiario());
-                    jogosPlataforma.set(idx - 1, novo);
-                    System.out.println("Atualizado.");
+                    jp.setEstoque(novoEst);
+                    System.out.println("Estoque atualizado com sucesso!");
                 }
                 case 5 -> {
                     listarJogos();
@@ -436,10 +443,10 @@ public class Main {
                     if (idx >= 1 && idx <= jogosPlataforma.size()) {
                         jogosPlataforma.remove(idx - 1);
                         System.out.println("Removido.");
-                    } else System.out.println("Invalido.");
+                    } else System.out.println("Inválido.");
                 }
                 case 0 -> { return; }
-                default -> System.out.println("Invalido.");
+                default -> System.out.println("Inválido.");
             }
         }
     }
@@ -447,21 +454,29 @@ public class Main {
     private static void gerenciarConsolesAcessorios() {
         while (true) {
             System.out.println("\n--- Gerenciar Consoles e Acessórios ---");
-            System.out.println("1 - Listar consoles\n2 - Cadastrar console\n3 - Atualizar console\n4 - Remover console\n5 - Listar acessorios\n6 - Cadastrar acessorio\n7 - Remover acessorio\n0 - Voltar");
+            System.out.println("""
+            1 - Listar consoles
+            2 - Cadastrar console
+            3 - Atualizar console
+            4 - Remover console
+            5 - Listar acessórios
+            6 - Cadastrar acessório
+            7 - Remover acessório
+            0 - Voltar
+            """);
             System.out.print("Escolha: ");
             int op = lerInt();
-            entrada.nextLine();
 
             switch (op) {
                 case 1 -> {
                     if (consoles.isEmpty()) System.out.println("Nenhum console.");
-                    else consoles.forEach(c -> System.out.println(c));
+                    else consoles.forEach(System.out::println);
                 }
                 case 2 -> {
                     int id = gerarId();
                     System.out.print("Nome do console: ");
                     String nome = lerLinha();
-                    System.out.print("Preco por hora: ");
+                    System.out.print("Preço por hora: ");
                     double preco = lerDouble();
                     Console c = new Console(id, nome, preco);
                     consoles.add(c);
@@ -474,16 +489,15 @@ public class Main {
                     }
                     System.out.print("Escolha console: ");
                     int idx = lerInt();
-                    if (idx < 1 || idx > consoles.size()) { System.out.println("Invalido."); break; }
+                    if (idx < 1 || idx > consoles.size()) { System.out.println("Inválido."); break; }
                     Console old = consoles.get(idx - 1);
                     System.out.print("Novo nome (enter para manter '" + old.getNome() + "'): ");
                     String nn = lerLinha();
-                    System.out.print("Novo preco (digite -1 para manter " + old.getPrecoHora() + "): ");
+                    System.out.print("Novo preço (digite -1 para manter " + old.getPrecoHora() + "): ");
                     double np = lerDouble();
                     String nomeFinal = nn.isBlank() ? old.getNome() : nn;
                     double precoFinal = np < 0 ? old.getPrecoHora() : np;
-                    Console novo = new Console(old.getId(), nomeFinal, precoFinal);
-                    consoles.set(idx - 1, novo);
+                    consoles.set(idx - 1, new Console(old.getId(), nomeFinal, precoFinal));
                     System.out.println("Atualizado.");
                 }
                 case 4 -> {
@@ -496,31 +510,32 @@ public class Main {
                     if (idx >= 1 && idx <= consoles.size()) consoles.remove(idx - 1);
                 }
                 case 5 -> {
-                    if (acessorios.isEmpty()) System.out.println("Nenhum acessorio.");
-                    else acessorios.forEach(a -> System.out.println(a));
+                    if (acessorios.isEmpty()) System.out.println("Nenhum acessório.");
+                    else acessorios.forEach(System.out::println);
                 }
                 case 6 -> {
                     int id = gerarId();
-                    System.out.print("Nome do acessorio: ");
+                    System.out.print("Nome do acessório: ");
                     String nome = lerLinha();
                     Acessorio a = new Acessorio(id, nome);
                     acessorios.add(a);
-                    System.out.println("Acessorio cadastrado: " + a);
+                    System.out.println("Acessório cadastrado: " + a);
                 }
                 case 7 -> {
-                    if (acessorios.isEmpty()) { System.out.println("Nenhum acessorio."); break; }
+                    if (acessorios.isEmpty()) { System.out.println("Nenhum acessório."); break; }
                     for (int i = 0; i < acessorios.size(); i++) {
                         System.out.printf("%d) %s%n", i + 1, acessorios.get(i).getNome());
                     }
-                    System.out.print("Escolha acessorio para remover: ");
+                    System.out.print("Escolha acessório para remover: ");
                     int idx = lerInt();
                     if (idx >= 1 && idx <= acessorios.size()) acessorios.remove(idx - 1);
                 }
                 case 0 -> { return; }
-                default -> System.out.println("Invalido.");
+                default -> System.out.println("Inválido.");
             }
         }
     }
+
 
     private static void listarTodasLocacoes() {
         System.out.println("\n--- Locacoes de Jogos ---");
@@ -569,10 +584,12 @@ public class Main {
     private static double lerDouble() {
         while (true) {
             try {
-                String s = entrada.nextLine();
-                return Double.parseDouble(s.trim());
-            } catch (Exception e) {
-                System.out.print("Entrada invalida. Digite um numero: ");
+                double valor = entrada.nextDouble();
+                entrada.nextLine(); // limpa o buffer
+                return valor;
+            } catch (InputMismatchException e) {
+                System.out.print("Valor inválido, tente novamente: ");
+                entrada.nextLine(); // limpa entrada errada
             }
         }
     }

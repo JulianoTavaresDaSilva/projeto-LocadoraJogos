@@ -13,10 +13,29 @@ public class JogoPlataforma {
         this.precoDiario = precoDiario;
     }
 
-    public Jogo getJogo() { return jogo; }
-    public Plataforma getPlataforma() { return plataforma; }
-    public int getEstoque() { return estoque; }
-    public double getPrecoDiario() { return precoDiario; }
+    public Jogo getJogo() {
+        return jogo;
+    }
+
+    public Plataforma getPlataforma() {
+        return plataforma;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public double getPrecoDiario() {
+        return precoDiario;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
+    public void setPrecoDiario(double precoDiario) {
+        this.precoDiario = precoDiario;
+    }
 
     public void diminuirEstoque() {
         if (estoque > 0) estoque--;
@@ -24,7 +43,8 @@ public class JogoPlataforma {
 
     @Override
     public String toString() {
-        return jogo.getTitulo() + " - " + plataforma.getNome() + " | R$ " + precoDiario + "/dia | Estoque: " + estoque;
+        return jogo.getTitulo() + " - " + plataforma.getNome() +
+                " | R$ " + precoDiario + "/dia | Estoque: " + estoque;
     }
 }
 
