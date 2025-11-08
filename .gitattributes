@@ -10,3 +10,13 @@
 # Binary files should be left untouched
 *.jar           binary
 
+# ---------- Linguist configuration (para o GitHub detectar corretamente o Java) ----------
+
+# Marca arquivos .java como detectáveis
+*.java linguist-detectable=true
+
+# Ignora arquivos compilados e dependências
+*.class linguist-detectable=false
+*.jar linguist-detectable=false
+build/** linguist-detectable=false
+
