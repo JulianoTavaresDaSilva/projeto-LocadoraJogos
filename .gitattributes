@@ -1,22 +1,27 @@
-#
-# https://help.github.com/articles/dealing-with-line-endings/
-#
-# Linux start script should use lf
-/gradlew        text eol=lf
+# Scripts Linux (LF)
+/gradlew text eol=lf
 
-# These are Windows script files and should use crlf
-*.bat           text eol=crlf
+# Scripts Windows (CRLF)
+*.bat text eol=crlf
 
-# Binary files should be left untouched
-*.jar           binary
+# Arquivos binários
+*.jar binary
 
-# ---------- Linguist configuration (para o GitHub detectar corretamente o Java) ----------
 
-# Marca arquivos .java como detectáveis
+# CONFIGURAÇÃO DO LINGUIST (PARA ESTATÍSTICAS DO GITHUB)
+
+# Marca arquivos .java como detectáveis (garante contagem de Java)
 *.java linguist-detectable=true
+*.java linguist-language=Java
 
 # Ignora arquivos compilados e dependências
 *.class linguist-detectable=false
 *.jar linguist-detectable=false
-build/** linguist-detectable=false
+/build/** linguist-detectable=false
+/.gradle/** linguist-detectable=false
+/out/** linguist-detectable=false
+
+# Ignora arquivos de IDE
+/.idea/** linguist-detectable=false
+*.iml linguist-detectable=false
 
