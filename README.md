@@ -1,6 +1,6 @@
 # 🎮 Sistema de Locadora de Jogos Digitais
 
-Sistema desenvolvido em **Java** para gerenciar o funcionamento de uma locadora de jogos, permitindo o controle de usuários, jogos, plataformas, consoles e acessórios.
+Sistema desenvolvido em **Gradle** com **Java** para gerenciar o funcionamento de uma locadora de jogos, permitindo o controle de usuários, jogos, plataformas, consoles e acessórios.
 
 ## ⚙️ Funcionalidades
 - Cadastro, listagem, atualização e remoção de usuários.  
