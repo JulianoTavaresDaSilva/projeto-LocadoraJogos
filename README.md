@@ -18,6 +18,8 @@ Sistema desenvolvido em **Gradle** com **Java** para gerenciar o funcionamento d
 ## 🎯 Objetivo
 Projeto acadêmico desenvolvido para praticar conceitos de **POO**, **encapsulamento** e **organização de sistemas em Java**.
 
+👨‍💻 **Desenvolvido por Juliano Tavares e Gelson Junior**
+
 ---
 
 Diagrama de Classes
